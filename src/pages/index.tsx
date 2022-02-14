@@ -7,9 +7,21 @@ export default function Home() {
       <Head>
         <title>Board - Organizando suas tarefas.</title>
       </Head>
-      <div>
-        <h1 className={styles.title}>Board</h1>
-      </div>
+      <main className={styles.contentContainer}>
+        <img src="/images/board-user.svg" alt="Ferramenta board" />
+        <section className={styles.callToAction}>
+          <h1>
+            Uma ferramenta para seu dia a dia Escreva, planeje e organiza-se...
+          </h1>
+          <p>
+            <span>100% Gratuita</span> e online
+          </p>
+        </section>
+        <div className={styles.donaters}>
+          <h2>Apoiadores:</h2>
+          <img src="https://sujeitoprogramador.com/steve.png" alt="Usuario 1" />
+        </div>
+      </main>
     </>
   );
 }
