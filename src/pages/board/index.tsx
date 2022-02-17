@@ -4,16 +4,52 @@ import { GetServerSideProps } from 'next';
 import styles from './styles.module.scss';
 import { FiPlus, FiCalendar, FiEdit2, FiTrash, FiClock } from 'react-icons/fi';
 import { SupportButton } from '../../components/SupportButton';
+import { FormEvent, useState } from 'react';
+import firebase from '../../services/firebaseConnection';
 
-export default function Board() {
+interface BoardProps {
+  user: {
+    id: string;
+    nome: string;
+  };
+}
+
+export default function Board({ user }: BoardProps) {
+  const [input, setInput] = useState('');
+
+  const handleAddTask = async (e: FormEvent) => {
+    e.preventDefault();
+    if (input === '') {
+      alert('Preencha alguma tarefa');
+      return;
+    }
+    await firebase
+      .firestore()
+      .collection('tarefas')
+      .add({
+        created: new Date(),
+        tarefa: input,
+        userId: user.id,
+        nome: user.nome,
+      })
+      .then((doc) => {
+        console.log('Teste');
+      })
+      .catch((err) => {});
+  };
   return (
     <>
       <Head>
         <title>Minhas taredas - Board</title>
       </Head>
       <main className={styles.container}>
-        <form>
-          <input type="text" placeholder="Digite sua tarefa..." />
+        <form onSubmit={handleAddTask}>
+          <input
+            type="text"
+            placeholder="Digite sua tarefa..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
           <button type="submit">
             <FiPlus size={25} color="#17181f" />
           </button>
@@ -67,7 +103,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     };
   }
 
+  const user = {
+    nome: session?.user.name,
+    id: session?.id,
+  };
+
   return {
-    props: {},
+    props: {
+      user,
+    },
   };
 };

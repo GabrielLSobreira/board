@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
-import 'firebase/firebase';
+import 'firebase/firestore';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyBiSNHBdMrWM_CNJqme-yWwuTcPS43jDp8',
   authDomain: 'boardapp-46c34.firebaseapp.com',
