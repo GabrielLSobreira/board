@@ -6,6 +6,8 @@ import { FiPlus, FiCalendar, FiEdit2, FiTrash, FiClock } from 'react-icons/fi';
 import { SupportButton } from '../../components/SupportButton';
 import { FormEvent, useState } from 'react';
 import firebase from '../../services/firebaseConnection';
+import Link from 'next/link';
+import { format } from 'date-fns';
 
 interface BoardProps {
   user: {
@@ -16,6 +18,7 @@ interface BoardProps {
 
 export default function Board({ user }: BoardProps) {
   const [input, setInput] = useState('');
+  const [taskList, setTaskList] = useState([]);
 
   const handleAddTask = async (e: FormEvent) => {
     e.preventDefault();
@@ -33,7 +36,16 @@ export default function Board({ user }: BoardProps) {
         nome: user.nome,
       })
       .then((doc) => {
-        console.log('Teste');
+        let data = {
+          id: doc.id,
+          created: new Date(),
+          createdFormated: format(new Date(), 'dd MMMM yyyy'),
+          tarefa: input,
+          userId: user.id,
+          nome: user.nome,
+        };
+        setTaskList([...taskList, data]);
+        setInput('');
       })
       .catch((err) => {});
   };
@@ -56,28 +68,29 @@ export default function Board({ user }: BoardProps) {
         </form>
         <h1>Você tem 2 tarefas!</h1>
         <section>
-          <article className={styles.taskList}>
-            <p>
-              Aprenda a criar projetos usando Next JS e aplicando Firebase com
-              back
-            </p>
-            <div className={styles.actions}>
-              <div>
+          {taskList.map((task) => (
+            <article className={styles.taskList}>
+              <Link href={`/board/${task.id}`}>
+                <p>{task.tarefa}</p>
+              </Link>
+              <div className={styles.actions}>
                 <div>
-                  <FiCalendar size={20} color="#ffb800" />
-                  <time>17 julho 2021</time>
+                  <div>
+                    <FiCalendar size={20} color="#ffb800" />
+                    <time>{task.createdFormated}</time>
+                  </div>
+                  <button>
+                    <FiEdit2 size={20} color="#fff" />
+                    <span>Editar</span>
+                  </button>
                 </div>
                 <button>
-                  <FiEdit2 size={20} color="#fff" />
-                  <span>Editar</span>
+                  <FiTrash size={20} color="#ff3636" />
+                  <span>Excluir</span>
                 </button>
               </div>
-              <button>
-                <FiTrash size={20} color="#ff3636" />
-                <span>Excluir</span>
-              </button>
-            </div>
-          </article>
+            </article>
+          ))}
         </section>
       </main>
       <div className={styles.vipContainer}>
