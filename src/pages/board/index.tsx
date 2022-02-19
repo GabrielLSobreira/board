@@ -98,6 +98,8 @@ export default function Board({ user, data }: BoardProps) {
       .then(() => {
         let taskDeleted = taskList.filter((item) => item.id !== id);
         setTaskList(taskDeleted);
+        setTaskEdit(null);
+        setInput('');
       });
   };
 
