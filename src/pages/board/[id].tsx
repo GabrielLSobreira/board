@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import Head from 'next/head';
 import styles from './tasks.module.scss';
 import { FiCalendar } from 'react-icons/fi';
+import { ptBR } from 'date-fns/locale';
 
 type Task = {
   id: string;
@@ -67,7 +68,8 @@ export const getServerSideProps: GetServerSideProps = async ({
         created: snapshot.data().created,
         createdFormated: format(
           snapshot.data().created.toDate(),
-          'dd MMMM yyyy'
+          'dd MMMM yyyy',
+          { locale: ptBR }
         ),
         tarefa: snapshot.data().tarefa,
         userId: snapshot.data().userId,

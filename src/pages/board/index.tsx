@@ -81,7 +81,7 @@ export default function Board({ user, data }: BoardProps) {
         let data = {
           id: doc.id,
           created: new Date(),
-          createdFormated: format(new Date(), 'dd MMMM yyyy'),
+          createdFormated: format(new Date(), 'dd MMMM yyyy', { locale: ptBR }),
           tarefa: input,
           userId: user.id,
           nome: user.nome,
@@ -215,7 +215,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     tasks.docs.map((u) => {
       return {
         id: u.id,
-        createdFormated: format(u.data().created.toDate(), 'dd MMMM yyyy'),
+        createdFormated: format(u.data().created.toDate(), 'dd MMMM yyyy', {
+          locale: ptBR,
+        }),
         ...u.data(),
       };
     })
