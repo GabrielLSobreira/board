@@ -1,8 +1,22 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import styles from '../styles/styles.module.scss';
+import firebase from '../services/firebaseConnection';
+import { useState } from 'react';
 
-export default function Home() {
+type Data = {
+  id: string;
+  donate: boolean;
+  lastDonate: Date;
+  image: string;
+};
+
+interface HomeProps {
+  data: string;
+}
+
+export default function Home({ data }: HomeProps) {
+  const [donaters, setDonaters] = useState<Data[]>(JSON.parse(data));
   return (
     <>
       <Head>
@@ -19,8 +33,10 @@ export default function Home() {
           </p>
         </section>
         <div className={styles.donaters}>
-          <h2>Apoiadores:</h2>
-          <img src="https://sujeitoprogramador.com/steve.png" alt="Usuario 1" />
+          {donaters.length !== 0 && <h2>Apoiadores:</h2>}
+          {donaters.map((item) => (
+            <img key={item.id} src={item.image} alt="Avatar do usuario" />
+          ))}
         </div>
       </main>
     </>
@@ -28,8 +44,19 @@ export default function Home() {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  const donaters = await firebase.firestore().collection('users').get();
+  const data = JSON.stringify(
+    donaters.docs.map((u) => {
+      return {
+        id: u.id,
+        ...u.data(),
+      };
+    })
+  );
   return {
-    props: {},
+    props: {
+      data,
+    },
     revalidate: 60 * 60, // Atualiza a cada 60 minutos
   };
 };
