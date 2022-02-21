@@ -1,34 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Board
 
-## Getting Started
+# Sobre o projeto
 
-First, run the development server:
+O projeto é um board de tarefas desenvolvido com NextJS e Firebase. Utilizei o NextAuth para gerenciar o acesso e as permissões do usuário ao sistema, foi implementado também um sistema de Donate com o PayPal, que ao fazer uma doação ao projeto o usuário libera algumas funcionalidades extras.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<b>Usuário deslogado</b>: Acesso apenas a página Home.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<b>Usuário logado</b>: Acesso ao board de tarefas e página de Donate.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<b>Usuário logado e que fez uma doação</b>: Acesso ao board, página de Donate, funcionalidades extras de editar, ver os detalhes de uma tarefa e visualizar quando foi feita a última doação.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Demonstração 👨‍💻
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<img src="./github/ProjectGif.gif" alt="gif">
 
-## Learn More
+## 💻 Projeto em produção
 
-To learn more about Next.js, take a look at the following resources:
+https://gsboard.herokuapp.com/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Tecnologias Usadas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- ✔️ [Next.js](https://pt-br.reactjs.org/)
 
-## Deploy on Vercel
+- ✔️ [NextAuth](https://next-auth.js.org/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ✔️ [Typescript](https://www.typescriptlang.org/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- ✔️ [Firebase](https://firebase.google.com/)
+
+- ✔️ [React](https://pt-br.reactjs.org/)
+
+- ✔️ [Sass](https://sass-lang.com/)
