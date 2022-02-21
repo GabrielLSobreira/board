@@ -5,6 +5,8 @@ import { getSession } from 'next-auth/client';
 import { GetServerSideProps } from 'next';
 import firebase from '../../services/firebaseConnection';
 import { PayPalButtons } from '@paypal/react-paypal-js';
+import Image from 'next/image';
+import rocket from '../../../public/images/rocket.svg';
 
 interface DonateProps {
   user: {
@@ -42,7 +44,7 @@ export default function Donate({ user }: DonateProps) {
             <span>Parabéns você é um novo apoiador</span>
           </div>
         )}
-        <h1>Seja um apoiador desse projeto</h1>
+        <h1>Seja um apoiador desse projeto 🏆</h1>
         <h3>
           Contribua com apenas <span>R$ 1,00</span>
         </h3>

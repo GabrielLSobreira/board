@@ -9,7 +9,7 @@
   justify-content: center;
   flex-direction: column;
 
-  img {
+  > div {
     margin-top: 2rem;
   }
 }
@@ -48,7 +48,7 @@
 
   h2 {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
     font-size: 1.1rem;
   }
 
