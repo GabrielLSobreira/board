@@ -20,7 +20,7 @@ https://gsboard.herokuapp.com/
 
 ## 🚀 Tecnologias Usadas
 
-- ✔️ [Next.js](https://pt-br.reactjs.org/)
+- ✔️ [Next.js](https://nextjs.org/)
 
 - ✔️ [NextAuth](https://next-auth.js.org/)
 
